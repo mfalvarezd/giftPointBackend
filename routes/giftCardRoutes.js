@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const authenticateUser = require('../middleware/authMiddleware');
+const { getUserGiftCards, createGiftCard } = require('../controllers/giftCardController');
 
-// Ruta de prueba
-router.get('/test', (req, res) => {
-  res.send('Giftcard route funcionando');
-});
+router.use(authenticateUser);
+
+router.get('/', getUserGiftCards);
+router.post('/', createGiftCard);
 
 module.exports = router;
