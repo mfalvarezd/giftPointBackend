@@ -64,7 +64,33 @@ const createGiftCard = (req, res) => {
   }
 };
 
+const getGiftCardById = (req, res) => {
+  const giftCardId = req.params.id;
+
+  try {
+    const rawData = fs.readFileSync(dbPath);
+    const data = JSON.parse(rawData);
+
+    const giftCard = data.giftcards.find(card => card.id.toString() === giftCardId);
+
+
+    if (!giftCard) {
+      return res.status(404).json({ message: 'Gift card no encontrada' });
+    }
+
+    if (giftCard.ownerId !== req.user.id) {
+      return res.status(403).json({ message: 'No tienes permiso para ver esta gift card' });
+    }
+
+    res.status(200).json(giftCard);
+  } catch (error) {
+    console.error('Error al obtener gift card:', error);
+    res.status(500).json({ message: 'Error en el servidor' });
+  }
+};
+
 module.exports = {
   getUserGiftCards,
   createGiftCard,
+    getGiftCardById
 };
