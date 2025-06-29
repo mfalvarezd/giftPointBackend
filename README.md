@@ -19,7 +19,7 @@ API RESTful construida con Node.js y Express para gestionar usuarios, autenticac
 1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/tuusuario/giftPointBackend.git
+   git clone https://github.com/mfalvarezd/giftPointBackend.git
    cd giftPointBackend
    ```
 
